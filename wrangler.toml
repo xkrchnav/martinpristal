@@ -1,0 +1,16 @@
+# Cloudflare Pages configuration
+name = "martinpristal"
+pages_build_output_dir = "./dist"
+compatibility_date = "2024-01-01"
+
+# Enable Node.js compatibility if needed
+# compatibility_flags = ["nodejs_compat"]
+
+# KV stores configuration
+# [[kv_namespaces]]
+# binding = "MY_KV"
+# id = "<NAMESPACE_ID>"
+
+# Environment-specific configuration
+# [env.production]
+# [env.preview]
