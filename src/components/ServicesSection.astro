@@ -1,0 +1,26 @@
+---
+interface Props {
+  variant: 'creative' | 'professional';
+  title: string;
+  body?: string;
+  services: Array<{ title: string; description: string; icon: string }>;
+}
+
+const { variant, title, body, services } = Astro.props;
+---
+
+<section id="services" class="section">
+  <div class="container">
+    <h2 class="section__title">{title}</h2>
+    {body && <p class="section__subtitle">{body}</p>}
+    <div class="services__grid">
+      {services.map((service) => (
+        <div class="service-card">
+          <div class="service-card__icon">{service.icon}</div>
+          <h3 class="service-card__title">{service.title}</h3>
+          <p class="service-card__desc">{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

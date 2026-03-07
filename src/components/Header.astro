@@ -1,0 +1,156 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
+interface Props {
+  variant?: 'creative' | 'professional';
+}
+
+const { variant } = Astro.props;
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="MP Electro & Services — Domů">
+      <Image src={logo} alt="MP Electro & Services" height={48} width={48} />
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="header__toggle-input" aria-hidden="true" />
+    <label for="nav-toggle" class="header__toggle" aria-label="Otevřít menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="header__nav" aria-label="Hlavní navigace">
+      <ul class="header__links">
+        <li><a href="#about">O mně</a></li>
+        <li><a href="#services">Služby</a></li>
+        <li><a href="#gallery">Galerie</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .header__logo img {
+    height: 48px;
+    width: auto;
+    border-radius: 6px;
+  }
+
+  .header__toggle-input {
+    display: none;
+  }
+
+  .header__toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: var(--space-sm);
+    z-index: 101;
+  }
+
+  .header__toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  .header__toggle-input:checked ~ .header__toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .header__toggle-input:checked ~ .header__toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  .header__toggle-input:checked ~ .header__toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .header__nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(300px, 80vw);
+    height: 100vh;
+    background: var(--color-bg);
+    border-left: 1px solid var(--color-border);
+    padding-top: calc(var(--header-height) + var(--space-xl));
+    transition: right var(--transition-base);
+  }
+
+  .header__toggle-input:checked ~ .header__nav {
+    right: 0;
+  }
+
+  .header__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+  }
+
+  .header__links a {
+    display: block;
+    padding: var(--space-md);
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .header__links a:hover {
+    background: var(--color-surface);
+    color: var(--color-accent);
+  }
+
+  @media (min-width: 768px) {
+    .header__toggle {
+      display: none;
+    }
+
+    .header__nav {
+      position: static;
+      width: auto;
+      height: auto;
+      background: transparent;
+      border: none;
+      padding-top: 0;
+    }
+
+    .header__links {
+      flex-direction: row;
+      gap: 0;
+      padding: 0;
+    }
+
+    .header__links a {
+      padding: var(--space-sm) var(--space-md);
+      font-size: 0.95rem;
+    }
+  }
+</style>

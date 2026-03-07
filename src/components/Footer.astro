@@ -1,0 +1,51 @@
+---
+interface Props {
+  variant?: 'creative' | 'professional';
+}
+
+const { variant } = Astro.props;
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <strong>MP Electro & Services</strong>
+      <p>Martin Přistal — Profesionální elektroinstalace a průmyslová automatizace</p>
+    </div>
+    <div class="footer__copy">
+      <p>&copy; 2026 Martin Přistal — MP Electro & Services. Všechna práva vyhrazena.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--space-2xl);
+    margin-top: var(--space-3xl);
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__brand strong {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .footer__brand p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .footer__copy p {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  variant: 'creative' | 'professional';
+  headline: string;
+  subheadline: string;
+  body?: string;
+  ctaText: string;
+  ctaHref: string;
+  image: ImageMetadata;
+  imageAlt: string;
+}
+
+const { variant, headline, subheadline, body, ctaText, ctaHref, image, imageAlt } = Astro.props;
+---
+
+<section id="hero" class="hero">
+  {variant === 'creative' ? (
+    <>
+      <div class="hero__bg">
+        <Image src={image} alt={imageAlt} width={1920} height={1080} />
+        <div class="hero__overlay"></div>
+      </div>
+      <div class="container hero__content">
+        <h1 class="hero__headline">{headline}</h1>
+        <p class="hero__subheadline">{subheadline}</p>
+        {body && <p class="hero__body">{body}</p>}
+        <a href={ctaHref} class="btn-primary">{ctaText}</a>
+      </div>
+    </>
+  ) : (
+    <div class="container">
+      <div class="hero__grid">
+        <div>
+          <h1 class="hero__headline">{headline}</h1>
+          <p class="hero__subheadline">{subheadline}</p>
+          {body && <p class="hero__body">{body}</p>}
+          <a href={ctaHref} class="btn-primary">{ctaText}</a>
+        </div>
+        <div class="hero__image">
+          <Image src={image} alt={imageAlt} width={600} height={800} />
+        </div>
+      </div>
+    </div>
+  )}
+</section>

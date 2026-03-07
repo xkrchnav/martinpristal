@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  variant: 'creative' | 'professional';
+  title: string;
+  images: Array<{ src: ImageMetadata; alt: string }>;
+}
+
+const { variant, title, images } = Astro.props;
+---
+
+<section id="gallery" class="section">
+  <div class="container">
+    <h2 class="section__title">{title}</h2>
+    <div class="gallery__grid">
+      {images.map((img) => (
+        <div class="gallery__item">
+          <Image src={img.src} alt={img.alt} width={400} height={400} loading="lazy" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
