@@ -1,17 +1,137 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Martin Přistal — MP Electro & Services">
+  <main class="landing">
+    <div class="landing__container">
+      <div class="landing__logo">
+        <Image src={logo} alt="MP Electro & Services" width={120} height={120} />
+      </div>
+
+      <h1 class="landing__title">Martin Přistal</h1>
+      <p class="landing__subtitle">MP Electro & Services</p>
+      <p class="landing__tagline">Profesionální elektroinstalace a průmyslová automatizace</p>
+
+      <div class="landing__cards">
+        <a href="/creative" class="landing__card landing__card--creative">
+          <h2>Kreativní verze</h2>
+          <p>Odvážná, energická prezentace — příběh, adrenalin a řemeslo</p>
+          <span class="landing__arrow">→</span>
+        </a>
+
+        <a href="/professional" class="landing__card landing__card--professional">
+          <h2>Profesionální verze</h2>
+          <p>Autoritativní, strukturovaná B2B prezentace — kvalifikace a kapacity</p>
+          <span class="landing__arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .landing {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl);
+  }
+
+  .landing__container {
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .landing__logo {
+    margin-bottom: var(--space-xl);
+  }
+
+  .landing__logo img {
+    margin-inline: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(11, 19, 43, 0.15);
+  }
+
+  .landing__title {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: var(--space-xs);
+  }
+
+  .landing__subtitle {
+    font-size: 1.1rem;
+    color: var(--color-lime);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+  }
+
+  .landing__tagline {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2xl);
+    font-size: 1.05rem;
+  }
+
+  .landing__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .landing__cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .landing__card {
+    display: block;
+    padding: var(--space-xl);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    text-align: left;
+    transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .landing__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(11, 19, 43, 0.12);
+  }
+
+  .landing__card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+  }
+
+  .landing__card p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+  }
+
+  .landing__arrow {
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .landing__card--creative:hover {
+    border-color: var(--color-lime);
+  }
+
+  .landing__card--professional:hover {
+    border-color: var(--color-navy);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .landing__card--professional:hover {
+      border-color: var(--color-lime);
+    }
+  }
+</style>
