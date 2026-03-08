@@ -1,0 +1,140 @@
+---
+const testimonials = [
+  {
+    name: 'Jan Novák',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Perfektní domluva, rychlá realizace. Vše funguje, jak má.',
+    rating: 5,
+    date: 'před 2 týdny'
+  },
+  {
+    name: 'Petr Dvořák',
+    text: 'Lorem ipsum dolor sit amet. Skvělá práce na elektroinstalaci v našem novém domě. Profesionální přístup a čistá práce.',
+    rating: 5,
+    date: 'před měsícem'
+  },
+  {
+    name: 'Marie Svobodová',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pan Přistal nám zachránil starou elektroinstalaci. Moc děkujeme!',
+    rating: 5,
+    date: 'před 3 měsíci'
+  }
+];
+---
+
+<section id="testimonials" class="section">
+  <div class="container">
+    <h2 class="section__title">Reference</h2>
+    <p class="section__subtitle">Co o mé práci říkají klienti (Ukázková data)</p>
+
+    <div class="testimonials__grid">
+      {testimonials.map((review) => (
+        <div class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="testimonial-card__avatar">{review.name.charAt(0)}</div>
+            <div class="testimonial-card__info">
+              <h3 class="testimonial-card__name">{review.name}</h3>
+              <p class="testimonial-card__date">{review.date}</p>
+            </div>
+          </div>
+          
+          <div class="testimonial-card__stars">
+            {Array.from({ length: 5 }).map(() => (
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            ))}
+          </div>
+
+          <p class="testimonial-card__text">{review.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .testimonial-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .testimonial-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .testimonial-card__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-navy);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .testimonial-card__avatar {
+      background: var(--color-lime);
+      color: var(--color-navy);
+    }
+  }
+
+  .testimonial-card__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .testimonial-card__date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .testimonial-card__stars {
+    display: flex;
+    gap: 2px;
+    color: #FACC15; /* Star yellow */
+  }
+
+  .testimonial-card__stars svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .testimonial-card__text {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+    margin-top: var(--space-xs);
+  }
+</style>

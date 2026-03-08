@@ -1,12 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/logo.png';
-
-interface Props {
-  variant?: 'creative' | 'professional';
-}
-
-const { variant } = Astro.props;
 ---
 
 <header class="header">
@@ -26,7 +20,8 @@ const { variant } = Astro.props;
       <ul class="header__links">
         <li><a href="#about">O mně</a></li>
         <li><a href="#services">Služby</a></li>
-        <li><a href="#gallery">Galerie</a></li>
+        <li><a href="#gallery">Ukázky práce</a></li>
+        <li><a href="#testimonials">Reference</a></li>
         <li><a href="#contact">Kontakt</a></li>
       </ul>
     </nav>

@@ -1,9 +1,4 @@
 ---
-interface Props {
-  variant?: 'creative' | 'professional';
-}
-
-const { variant } = Astro.props;
 ---
 
 <footer class="footer">
@@ -13,7 +8,7 @@ const { variant } = Astro.props;
       <p>Martin Přistal — Profesionální elektroinstalace a průmyslová automatizace</p>
     </div>
     <div class="footer__copy">
-      <p>&copy; 2026 Martin Přistal — MP Electro & Services. Všechna práva vyhrazena.</p>
+      <p>&copy; {new Date().getFullYear()} Martin Přistal — MP Electro & Services. Všechna práva vyhrazena.</p>
     </div>
   </div>
 </footer>
@@ -23,6 +18,7 @@ const { variant } = Astro.props;
     border-top: 1px solid var(--color-border);
     padding-block: var(--space-2xl);
     margin-top: var(--space-3xl);
+    background: var(--color-bg);
   }
 
   .footer__inner {
@@ -37,15 +33,24 @@ const { variant } = Astro.props;
     font-size: 1.1rem;
     display: block;
     margin-bottom: var(--space-xs);
+    color: var(--color-text);
   }
 
   .footer__brand p {
     color: var(--color-text-muted);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   .footer__copy p {
     color: var(--color-text-muted);
     font-size: 0.85rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer__inner {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
   }
 </style>

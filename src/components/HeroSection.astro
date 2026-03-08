@@ -1,47 +1,127 @@
 ---
 import { Image } from 'astro:assets';
+import landingBg from '../assets/landing.jpeg';
+import logo from '../assets/logo.png';
 
 interface Props {
-  variant: 'creative' | 'professional';
   headline: string;
   subheadline: string;
-  body?: string;
   ctaText: string;
   ctaHref: string;
-  image: ImageMetadata;
-  imageAlt: string;
 }
 
-const { variant, headline, subheadline, body, ctaText, ctaHref, image, imageAlt } = Astro.props;
+const { headline, subheadline, ctaText, ctaHref } = Astro.props;
 ---
 
-<section id="hero" class="hero">
-  {variant === 'creative' ? (
-    <>
-      <div class="hero__bg">
-        <Image src={image} alt={imageAlt} width={1920} height={1080} />
-        <div class="hero__overlay"></div>
-      </div>
-      <div class="container hero__content">
-        <h1 class="hero__headline">{headline}</h1>
-        <p class="hero__subheadline">{subheadline}</p>
-        {body && <p class="hero__body">{body}</p>}
-        <a href={ctaHref} class="btn-primary">{ctaText}</a>
-      </div>
-    </>
-  ) : (
-    <div class="container">
-      <div class="hero__grid">
-        <div>
-          <h1 class="hero__headline">{headline}</h1>
-          <p class="hero__subheadline">{subheadline}</p>
-          {body && <p class="hero__body">{body}</p>}
-          <a href={ctaHref} class="btn-primary">{ctaText}</a>
-        </div>
-        <div class="hero__image">
-          <Image src={image} alt={imageAlt} width={600} height={800} />
-        </div>
-      </div>
+<section id="hero" class="hero-fullscreen">
+  <div class="hero-fullscreen__bg">
+    <Image src={landingBg} alt="Elektroinstalace pozadí" class="hero-fullscreen__img" />
+    <div class="hero-fullscreen__overlay"></div>
+  </div>
+  
+  <div class="container hero-fullscreen__content">
+    <div class="hero-fullscreen__logo-wrapper">
+      <Image src={logo} alt="MP Electro & Services Logo" class="hero-fullscreen__logo" />
     </div>
-  )}
+    <h1 class="hero-fullscreen__headline">{headline}</h1>
+    <p class="hero-fullscreen__subheadline">{subheadline}</p>
+    <a href={ctaHref} class="btn-primary hero-fullscreen__cta">{ctaText}</a>
+  </div>
 </section>
+
+<style>
+  .hero-fullscreen {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: var(--header-height);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-fullscreen__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-fullscreen__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-fullscreen__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(11, 19, 43, 0.85) 0%,
+      rgba(11, 19, 43, 0.65) 50%,
+      rgba(11, 19, 43, 0.95) 100%
+    );
+  }
+
+  .hero-fullscreen__content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .hero-fullscreen__logo-wrapper {
+    margin-bottom: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: var(--space-md);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-fullscreen__logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+  }
+
+  .hero-fullscreen__headline {
+    color: #ffffff;
+    font-size: clamp(2rem, 1.5rem + 3.5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    text-wrap: balance;
+  }
+
+  .hero-fullscreen__subheadline {
+    color: #e2e8f0;
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+    max-width: 700px;
+    margin-inline: auto;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+
+  .hero-fullscreen__cta {
+    margin-top: var(--space-md);
+    font-size: 1.1rem;
+    padding: var(--space-lg) var(--space-2xl);
+    box-shadow: 0 8px 24px rgba(192, 214, 103, 0.25);
+  }
+
+  @media (min-width: 768px) {
+    .hero-fullscreen__logo {
+      width: 120px;
+      height: 120px;
+    }
+  }
+</style>
