@@ -1,10 +1,10 @@
 {
-  "active_plan": "/mnt/f/projects/weby/martinpristal/.sisyphus/plans/martinpristal-web.md",
-  "started_at": "2026-03-07T00:00:00Z",
+  "active_plan": "/mnt/f/projects/weby/martinpristal/.sisyphus/plans/profi-redesign.md",
+  "started_at": "2026-03-08T08:26:12.817Z",
   "session_ids": [
-    "$SESSION_ID",
-    "ses_338e71264ffen2vCmzPo7Iqkq3"
+    "ses_33382dd86ffeUpLTwt2OSXTfuu",
+    "ses_3338ad22fffeuCkDNgRVko6hsQ"
   ],
-  "plan_name": "martinpristal-web",
+  "plan_name": "profi-redesign",
   "worktree_path": "/mnt/f/projects/weby/martinpristal"
 }

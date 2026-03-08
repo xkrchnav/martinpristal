@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  images: Array<{ src: ImageMetadata; alt: string }>;
+}
+
+const { images } = Astro.props;
+---
+
+<section class="photo-strip">
+  <div class="container">
+    <div class="photo-strip__grid">
+      {images.map((img) => (
+        <div class="photo-strip__item">
+          <Image src={img.src} alt={img.alt} width={800} height={533} loading="lazy" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
