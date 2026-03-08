@@ -1,0 +1,899 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import landingBg from '../assets/landing.jpeg';
+import logo from '../assets/logo.png';
+import featImg from '../assets/PXL_20251015_141756687.jpg';
+import img2 from '../assets/PXL_20241113_133346628.jpg';
+import img3 from '../assets/PXL_20241113_133457153.jpg';
+import img4 from '../assets/PXL_20241113_134028950.jpg';
+import img5 from '../assets/PXL_20241212_173348000.jpg';
+import img6 from '../assets/PXL_20250304_092245605.jpg';
+import img7 from '../assets/PXL_20250519_115904919.jpg';
+import img8 from '../assets/PXL_20251013_094044224.jpg';
+import img9 from '../assets/PXL_20251013_153826591.jpg';
+import img10 from '../assets/PXL_20251015_073807604.jpg';
+
+const testimonials = [
+  {
+    name: 'Jan Novák',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Perfektní domluva, rychlá realizace. Vše funguje, jak má.',
+    rating: 5,
+    date: 'před 2 týdny'
+  },
+  {
+    name: 'Petr Dvořák',
+    text: 'Lorem ipsum dolor sit amet. Skvělá práce na elektroinstalaci v našem novém domě. Profesionální přístup a čistá práce.',
+    rating: 5,
+    date: 'před měsícem'
+  },
+  {
+    name: 'Marie Svobodová',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pan Přistal nám zachránil starou elektroinstalaci. Moc děkujeme!',
+    rating: 5,
+    date: 'před 3 měsíci'
+  }
+];
+
+const gridIcons = [
+  { text: 'Elektrikářské služby', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />' },
+  { text: 'Domovní elektroinstalace', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />' },
+  { text: 'Instalace a rozvody', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />' },
+  { text: 'Rekonstrukce elektroinstalací', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />' },
+  { text: 'Moderní postupy a technologie', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />' },
+  { text: 'Návrhy a konzultace', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />' },
+  { text: 'Nákup materiálu a doprava', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />' },
+  { text: 'Revize ve spolupráci', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />' },
+];
+
+const services = [
+  {
+    num: "01",
+    title: "Elektroinstalace RD",
+    desc: "Návrhy, konzultace, realizace i revize elektroinstalací rodinných domů.",
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M13 11l-3 4h4l-3 4"></path></svg>'
+  },
+  {
+    num: "02",
+    title: "Elektroinstalace bytů",
+    desc: "Návrhy, konzultace, realizace i revize elektroinstalací bytů.",
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v18"></path><path d="M4 22h16"></path><path d="M9 6h2"></path><path d="M13 6h2"></path><path d="M9 10h2"></path><path d="M13 10h2"></path><path d="M9 14h2"></path><path d="M13 14h2"></path><path d="M10 22v-4h4v4"></path></svg>'
+  },
+  {
+    num: "03",
+    title: "Výměny a úpravy rozvaděčů",
+    desc: "Instalace a zapojení rozvaděčů, připojení podružných rozvaděčů pro RD.",
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><path d="M8 8h1"></path><path d="M12 8h4"></path><path d="M8 12h1"></path><path d="M12 12h4"></path><path d="M8 16h8"></path></svg>'
+  },
+  {
+    num: "04",
+    title: "Elektroinstalace kancelářských prostor",
+    desc: "Kompletní instalace elektriky do kancelářských prostor.",
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path><path d="M4 22h16"></path><path d="M12 8h2"></path><path d="M12 12h2"></path><path d="M12 16h2"></path><path d="M4 22V10a2 2 0 0 1 2-2h2"></path><path d="M14 22v-3h2v3"></path></svg>'
+  },
+  {
+    num: "05",
+    title: "Rekonstrukce elektroinstalací",
+    desc: "Dílčí i kompletní rekonstrukce elektroinstalace v bytech, RD, garážích, dílnách.",
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path><path d="M6.5 15.5l1.4 1.4"></path><path d="M4.5 13.5l1.4 1.4"></path><path d="M8.5 17.5l1.4 1.4"></path></svg>'
+  },
+  {
+    num: "06",
+    title: "Instalace a rozvody HDO",
+    desc: "Elektro rozvody, zapojení HDO, připojení spotřebičů k HDO – „noční proud\".",
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l3 3"></path><path d="M15 9l-2 3h3l-2 3"></path></svg>'
+  },
+  {
+    num: "07",
+    title: "Průmyslové instalace",
+    desc: "Montáž strojů, úpravy a modernizace pro automatizovaná pracoviště.",
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"></path><path d="M12 18v4"></path><path d="M4.93 4.93l2.83 2.83"></path><path d="M16.24 16.24l2.83 2.83"></path><path d="M2 12h4"></path><path d="M18 12h4"></path><path d="M4.93 19.07l2.83-2.83"></path><path d="M16.24 7.76l2.83-2.83"></path><circle cx="12" cy="12" r="4"></circle></svg>'
+  }
+];
+
+const galleryRight = [img2, img3, img4, img5, img6, img7, img8, img9, img10];
+---
+
+<BaseLayout title="Martin Přistal — Elektrikářské služby">
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <span class="top-bar__time">Po–Pá: 7:00 – 17:00</span>
+      <a href="mailto:info@mpelectro.cz" class="top-bar__email">info@mpelectro.cz</a>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#hero" class="header__logo">
+        <Image src={logo} alt="Logo" width={40} height={40} />
+        <span>MP Electro</span>
+      </a>
+      
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+
+      <nav class="header__nav">
+        <a href="#hero">ÚVOD</a>
+        <a href="#about">O NÁS</a>
+        <a href="#gallery">FOTOGALERIE</a>
+        <a href="#contact">KONTAKT</a>
+        <a href="tel:+420724411591" class="btn-primary header__btn">+420 724 411 591</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <Image src={landingBg} alt="Hero background" class="hero__bg" loading="eager" />
+      <div class="hero__overlay"></div>
+      <div class="container hero__content">
+        <div class="hero__logo-wrapper">
+          <Image src={logo} alt="Logo" class="hero__logo" />
+        </div>
+        <h1 class="hero__title">Elektrikářské služby</h1>
+        <h2 class="hero__subtitle">Elektroinstalace od návrhu až po revize</h2>
+        <p class="hero__desc">Kompletní elektrikářské služby pro rodinné domy, byty, kanceláře i průmysl v Brně a okolí.</p>
+        <a href="#contact" class="btn-primary hero__cta">Poptat nezávaznou konzultaci</a>
+      </div>
+    </section>
+
+    <div class="icon-grid-wrapper">
+      <div class="container">
+        <div class="icon-grid">
+          {gridIcons.map(item => (
+            <div class="icon-card">
+              <div class="icon-card__icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" set:html={item.icon} />
+              </div>
+              <span class="icon-card__text">{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <section id="about" class="section about">
+      <div class="container about__inner">
+        <div class="about__content">
+          <h2 class="section__title">O nás</h2>
+          <p class="about__text">Jmenuji se Martin Přistal a nabízím komplexní služby v oboru elektroinstalací. Zakládám si na preciznosti, dodržování termínů a individuálním přístupu ke každému zákazníkovi. Vždy se snažím najít to nejlepší a nejefektivnější řešení přímo pro vás.</p>
+          <ul class="about__list">
+            <li>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Profesionální přístup ke každé zakázce
+            </li>
+            <li>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Rychlá realizace a dodržení termínů
+            </li>
+            <li>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Kvalitní materiály od prověřených dodavatelů
+            </li>
+            <li>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Kompletní servis od návrhu po revizi
+            </li>
+            <li>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Osobní přístup a poradenství
+            </li>
+          </ul>
+        </div>
+        <div class="about__stats">
+          <div class="stat-card">
+            <span class="stat-card__num">2+</span>
+            <span class="stat-card__text">roky záruky</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__num">200+</span>
+            <span class="stat-card__text">provedených projektů</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__num">10+</span>
+            <span class="stat-card__text">let zkušeností</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__num">100%</span>
+            <span class="stat-card__text">spokojenost klientů</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services">
+      <div class="container">
+        <h2 class="section__title text-center">Naše služby</h2>
+        <p class="section__subtitle text-center">Pojďte na to s námi</p>
+        
+        <div class="services-grid">
+          {services.map(srv => (
+            <div class="service-card">
+              <div class="service-card__header">
+                <span class="service-card__num">{srv.num}</span>
+                <div class="service-card__icon" set:html={srv.icon}></div>
+              </div>
+              <h3 class="service-card__title">{srv.title}</h3>
+              <p class="service-card__desc">{srv.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <div class="container cta-banner__inner">
+        <div class="cta-banner__content">
+          <h2 class="cta-banner__title">Objednejte naše služby</h2>
+          <p class="cta-banner__desc">Kontaktujte nás pro nezávaznou konzultaci a cenovou nabídku.</p>
+        </div>
+        <a href="#contact" class="btn-primary cta-banner__btn">Kontaktovat</a>
+      </div>
+    </section>
+
+    <section id="gallery" class="section gallery">
+      <div class="container">
+        <h2 class="section__title">Naše práce</h2>
+        <p class="section__subtitle">Pohled pod pokličku našich realizací</p>
+        
+        <div class="gallery-layout">
+          <div class="gallery__feat">
+            <Image src={featImg} alt="Ukázka naší práce" class="gallery__img" loading="lazy" />
+          </div>
+          <div class="gallery__grid">
+            {galleryRight.map((img, i) => (
+              <div class="gallery__item">
+                <Image src={img} alt={`Ukázka práce ${i+1}`} class="gallery__img" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials">
+      <div class="container">
+        <h2 class="section__title text-center">Hodnocení zákazníků</h2>
+        <p class="section__subtitle text-center">Co o naší práci říkají klienti</p>
+        
+        <div class="testimonials-grid">
+          {testimonials.map(t => (
+            <div class="testimonial-card">
+              <div class="testimonial-card__header">
+                <div class="testimonial-card__avatar">
+                  {t.name.charAt(0)}
+                </div>
+                <div class="testimonial-card__info">
+                  <h3 class="testimonial-card__name">{t.name}</h3>
+                  <span class="testimonial-card__date">{t.date}</span>
+                </div>
+              </div>
+              <div class="testimonial-card__stars">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg fill={i < t.rating ? "var(--color-lime)" : "none"} stroke="var(--color-lime)" viewBox="0 0 24 24" class="star"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                ))}
+              </div>
+              <p class="testimonial-card__text">"{t.text}"</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container contact__inner">
+        <div class="contact__info">
+          <h2 class="section__title">Kontakt</h2>
+          <p class="section__subtitle">Jsme tu pro vás</p>
+          <div class="contact-links">
+            <a href="mailto:info@mpelectro.cz" class="contact-link">
+              <span class="contact-link__icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </span>
+              <span>info@mpelectro.cz</span>
+            </a>
+            <a href="tel:+420724411591" class="contact-link">
+              <span class="contact-link__icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              </span>
+              <span>+420 724 411 591</span>
+            </a>
+            <div class="contact-link">
+              <span class="contact-link__icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              </span>
+              <span>Brno město / Brno venkov</span>
+            </div>
+          </div>
+        </div>
+        <form class="contact__form">
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="Jméno a příjmení" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder="E-mail" required />
+            </div>
+            <div class="form-group">
+              <input type="tel" id="phone" name="phone" placeholder="Telefon" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea id="message" name="message" rows="5" placeholder="Vaše zpráva nebo dotaz..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Odeslat zprávu</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <Image src={logo} alt="Logo" width={32} height={32} />
+        <span>MP Electro & Services</span>
+      </div>
+      <p class="footer__copy">&copy; {new Date().getFullYear()} MP Electro & Services. Všechna práva vyhrazena.</p>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* Base Utilities */
+  .text-center { text-align: center; }
+  
+  /* Top Bar */
+  .top-bar {
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+  }
+  .top-bar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-bar__email {
+    color: var(--color-white);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .top-bar__email:hover {
+    color: var(--color-lime);
+  }
+
+  /* Header */
+  .header {
+    background-color: rgba(11, 19, 43, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height, 72px);
+  }
+  .header__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .header__nav a:not(.btn-primary) {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: color var(--transition-fast);
+  }
+  .header__nav a:not(.btn-primary):hover {
+    color: var(--color-lime);
+  }
+
+  /* Mobile menu toggle */
+  .nav-toggle, .nav-toggle-label {
+    display: none;
+  }
+  @media (max-width: 900px) {
+    .nav-toggle-label {
+      display: block;
+      cursor: pointer;
+      position: relative;
+      width: 30px;
+      height: 24px;
+    }
+    .nav-toggle-label span,
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+      display: block;
+      background: var(--color-white);
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      transition: all var(--transition-base);
+    }
+    .nav-toggle-label span { top: 11px; }
+    .nav-toggle-label span::before { content: ''; top: -9px; }
+    .nav-toggle-label span::after { content: ''; top: 9px; }
+
+    .nav-toggle:checked ~ .nav-toggle-label span { background: transparent; }
+    .nav-toggle:checked ~ .nav-toggle-label span::before { transform: rotate(45deg); top: 0; }
+    .nav-toggle:checked ~ .nav-toggle-label span::after { transform: rotate(-45deg); top: 0; }
+
+    .header__nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--color-navy);
+      flex-direction: column;
+      padding: 2rem;
+      gap: 1.5rem;
+      transform: translateY(-10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-base);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-toggle:checked ~ .header__nav {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 110px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-white);
+    padding: var(--space-3xl) var(--space-md);
+  }
+  .hero__bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .hero__overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(11,19,43,0.8), rgba(11,19,43,0.95));
+    z-index: -1;
+  }
+  .hero__content {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero__logo-wrapper {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-xl);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero__logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+  .hero__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+    color: var(--color-lime);
+  }
+  .hero__subtitle {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 400;
+    margin-bottom: var(--space-lg);
+  }
+  .hero__desc {
+    font-size: 1.125rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: var(--space-2xl);
+    max-width: 600px;
+  }
+
+  /* Icon Grid */
+  .icon-grid-wrapper {
+    background: var(--color-navy);
+    padding: var(--space-xl) 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+  }
+  @media (max-width: 768px) {
+    .icon-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+  }
+  .icon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-sm);
+  }
+  .icon-card__icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-lime);
+  }
+  .icon-card__text {
+    color: var(--color-white);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  /* About */
+  .about__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .about__inner { grid-template-columns: 1fr; }
+  }
+  .about__text {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+    line-height: 1.6;
+  }
+  .about__list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  .about__list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 500;
+  }
+  .about__list svg {
+    width: 24px;
+    height: 24px;
+    color: var(--color-lime);
+    flex-shrink: 0;
+  }
+  .about__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+  .stat-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: var(--space-xl);
+    border-radius: 8px;
+    text-align: center;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-lime);
+  }
+  .stat-card__num {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: var(--space-xs);
+  }
+  .stat-card__text {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  /* Services */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+  @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .services-grid { grid-template-columns: 1fr; } }
+  .service-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: var(--space-xl);
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-color: var(--color-lime);
+  }
+  .service-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-lg);
+  }
+  .service-card__num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-lime);
+    opacity: 0.5;
+  }
+  .service-card__icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(192, 214, 103, 0.1);
+    color: var(--color-lime);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  .service-card__icon svg { width: 100%; height: 100%; }
+  .service-card__title {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+    color: var(--color-navy);
+  }
+  .service-card__desc {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+  }
+
+  /* CTA Banner */
+  .cta-banner {
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    padding: var(--space-3xl) 0;
+  }
+  .cta-banner__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+  @media (max-width: 768px) {
+    .cta-banner__inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  .cta-banner__title {
+    font-size: 2rem;
+    margin-bottom: var(--space-xs);
+    color: var(--color-lime);
+  }
+  .cta-banner__desc {
+    font-size: 1.125rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* Gallery */
+  .gallery-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-2xl);
+  }
+  @media (max-width: 900px) {
+    .gallery-layout { grid-template-columns: 1fr; }
+  }
+  .gallery__feat {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .gallery__feat .gallery__img {
+    height: 100%;
+    min-height: 400px;
+  }
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+  @media (max-width: 600px) {
+    .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .gallery__item {
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+  }
+  .gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+  .gallery__img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Testimonials */
+  .testimonials {
+    background-color: var(--color-surface);
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+  @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+  .testimonial-card {
+    background: var(--color-white);
+    padding: var(--space-xl);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    border: 1px solid var(--color-border);
+  }
+  .testimonial-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+  .testimonial-card__avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--color-navy);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .testimonial-card__name {
+    font-size: 1.125rem;
+    margin: 0 0 2px 0;
+  }
+  .testimonial-card__date {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+  .testimonial-card__stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: var(--space-md);
+  }
+  .testimonial-card__stars .star {
+    width: 20px;
+    height: 20px;
+  }
+  .testimonial-card__text {
+    color: var(--color-text-muted);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Contact */
+  .contact__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+  }
+  @media (max-width: 900px) { .contact__inner { grid-template-columns: 1fr; } }
+  .contact-links {
+    margin-top: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 1.125rem;
+    transition: color var(--transition-fast);
+  }
+  a.contact-link:hover { color: var(--color-lime); }
+  .contact-link__icon {
+    width: 48px;
+    height: 48px;
+    background: var(--color-surface);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-lime);
+  }
+  .contact-link__icon svg { width: 24px; height: 24px; }
+  
+  .contact__form {
+    background: var(--color-surface);
+    padding: var(--space-2xl);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+  .form-group { margin-bottom: var(--space-md); }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+  .contact__form input,
+  .contact__form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color var(--transition-fast);
+  }
+  .contact__form input:focus,
+  .contact__form textarea:focus {
+    outline: none;
+    border-color: var(--color-lime);
+  }
+  .form-submit {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding: var(--space-xl) 0;
+    text-align: center;
+  }
+  .footer__brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+  }
+  .footer__copy {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.875rem;
+  }
+</style>
