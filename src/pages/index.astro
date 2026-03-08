@@ -1,137 +1,110 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import PhotoStrip from '../components/PhotoStrip.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import GallerySection from '../components/GallerySection.astro';
+import ContactSection from '../components/ContactSection.astro';
+
+import martinFb from '../assets/martin_fb.jpg';
+
+import strip1 from '../assets/PXL_20260226_141631970.jpg';
+import strip2 from '../assets/PXL_20251118_163706687.jpg';
+import strip3 from '../assets/PXL_20251114_175140526.jpg';
+import strip4 from '../assets/PXL_20241212_173348000.jpg';
+
+import gallery1 from '../assets/PXL_20260226_141631970.jpg';
+import gallery2 from '../assets/PXL_20251118_163706687.jpg';
+import gallery3 from '../assets/PXL_20251118_162533352.jpg';
+import gallery4 from '../assets/PXL_20251114_175140526.jpg';
+import gallery5 from '../assets/PXL_20251024_132850051.jpg';
+import gallery6 from '../assets/PXL_20241212_173348000.jpg';
+import gallery7 from '../assets/PXL_20241113_133650402.jpg';
+import gallery8 from '../assets/IMG_20250731_114924_186.jpg';
+
+const photoStripImages = [
+  { src: strip1, alt: 'Průmyslový rozvaděč — precizní práce' },
+  { src: strip2, alt: 'Silnoproudé rozvody — instalace' },
+  { src: strip3, alt: 'Elektroinstalace — detail práce' },
+  { src: strip4, alt: 'Profesionální elektromontáž' },
+];
+
+const silnoproudServices = [
+  { title: 'Kompletní elektroinstalace', description: 'Novostavby, byty a rodinné domy od projektu po revizi.', icon: '⚡' },
+  { title: 'Rekonstrukce rozvodů', description: 'Modernizace zastaralých instalací dle aktuálních norem.', icon: '🔧' },
+  { title: 'Montáže rozvaděčů', description: 'Rozvaděče, jističe a ochranné prvky pro bytové i průmyslové objekty.', icon: '🔌' },
+  { title: 'Připojení spotřebičů', description: 'Profesionální připojení a revize spotřebičů a zásuvkových okruhů.', icon: '🏭' },
+  { title: 'Elektrické přípojky', description: 'Přípojky NN, rozvodné skříně a koordinace s energetickými firmami.', icon: '🏗️' },
+];
+
+const slaboproudServices = [
+  { title: 'Průmyslová automatizace', description: 'Instalace, servis a programování výrobních linek a PLC systémů.', icon: '🤖' },
+  { title: 'Datové rozvody', description: 'Strukturovaná kabeláž, datové racky a síťová infrastruktura.', icon: '🌐' },
+  { title: 'Chytré domácnosti', description: 'IoT řešení a smart home integrace pro moderní bydlení.', icon: '🏠' },
+  { title: 'Servis výrobních linek', description: 'Programování, diagnostika a údržba průmyslových automatizačních systémů.', icon: '⚙️' },
+  { title: 'Kamerové a zabezpečovací systémy', description: 'Příprava kabeláže a instalace pro CCTV a zabezpečovací technika.', icon: '📷' },
+];
+
+const galleryImages = [
+  { src: gallery1, alt: 'Průmyslový rozvaděč — precizní zapojení' },
+  { src: gallery2, alt: 'Silnoproudé rozvody — detail' },
+  { src: gallery3, alt: 'Elektrický rozvaděč — kompletace' },
+  { src: gallery4, alt: 'Elektroinstalace — kvalitní řemeslo' },
+  { src: gallery5, alt: 'Rozvodná skříň — průmyslové řešení' },
+  { src: gallery6, alt: 'Profesionální elektromontáž' },
+  { src: gallery7, alt: 'Technické zázemí — hotový projekt' },
+  { src: gallery8, alt: 'Realizace — kompletní instalace' },
+];
 ---
 
-<BaseLayout title="Martin Přistal — MP Electro & Services">
-  <main class="landing">
-    <div class="landing__container">
-      <div class="landing__logo">
-        <Image src={logo} alt="MP Electro & Services" width={120} height={120} />
-      </div>
+<BaseLayout title="Martin Přistal — MP Electro & Services" variant="professional">
+  <Header variant="professional" />
+  
+  <a id="about" aria-hidden="true"></a>
 
-      <h1 class="landing__title">Martin Přistal</h1>
-      <p class="landing__subtitle">MP Electro & Services</p>
-      <p class="landing__tagline">Profesionální elektroinstalace a průmyslová automatizace</p>
+  <HeroSection
+    variant="professional"
+    headline="Profesionální elektroinstalace a průmyslová automatizace"
+    subheadline="Ing. Martin Přistal & tým. Spojujeme inženýrské know-how z VUT, německou preciznost a letité zkušenosti z praxe. Od rodinných domů po průmyslové haly."
+    body="Hledáte spolehlivého partnera pro komplexní zakázku? Zajišťujeme montáže výrobních linek, programování PLC systémů a kompletní silnoproudé i slaboproudé instalace pro komerční i soukromé objekty. Precizně, v termínu a s technologickým přehledem."
+    ctaText="Poptat nezávaznou konzultaci"
+    ctaHref="#contact"
+    image={martinFb}
+    imageAlt="Ing. Martin Přistal"
+  />
 
-      <div class="landing__cards">
-        <a href="/creative" class="landing__card landing__card--creative">
-          <h2>Kreativní verze</h2>
-          <p>Odvážná, energická prezentace — příběh, adrenalin a řemeslo</p>
-          <span class="landing__arrow">→</span>
-        </a>
 
-        <a href="/professional" class="landing__card landing__card--professional">
-          <h2>Profesionální verze</h2>
-          <p>Autoritativní, strukturovaná B2B prezentace — kvalifikace a kapacity</p>
-          <span class="landing__arrow">→</span>
-        </a>
-      </div>
-    </div>
-  </main>
+  <PhotoStrip images={photoStripImages} />
+
+  <ServicesSection
+    variant="professional"
+    title="Silnoproudé instalace"
+    body="Kompletní elektroinstalace na klíč — od základních rozvodů až po komplexní instalace v novostavbách a rekonstrukcích."
+    services={silnoproudServices}
+  />
+
+  <ServicesSection
+    variant="professional"
+    title="Slaboproud a automatizace"
+    body="Moderní technologie a průmyslová řešení pro inteligentní budovy a výrobní provozy."
+    services={slaboproudServices}
+  />
+
+  <GallerySection
+    variant="professional"
+    title="Reference a realizace"
+    images={galleryImages}
+  />
+
+  <ContactSection
+    variant="professional"
+    title="Poptat nezávaznou konzultaci"
+    description="Potřebujete spolehlivého partnera pro elektroinstalace nebo průmyslovou automatizaci? Neváhejte se ozvat."
+    email="info@mpelectro.cz"
+    phone="+420 123 456 789"
+  />
+
+  <Footer variant="professional" />
 </BaseLayout>
-
-<style>
-  .landing {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-xl);
-  }
-
-  .landing__container {
-    text-align: center;
-    max-width: 700px;
-  }
-
-  .landing__logo {
-    margin-bottom: var(--space-xl);
-  }
-
-  .landing__logo img {
-    margin-inline: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(11, 19, 43, 0.15);
-  }
-
-  .landing__title {
-    font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
-    font-weight: 800;
-    margin-bottom: var(--space-xs);
-  }
-
-  .landing__subtitle {
-    font-size: 1.1rem;
-    color: var(--color-lime);
-    font-weight: 600;
-    margin-bottom: var(--space-sm);
-  }
-
-  .landing__tagline {
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-2xl);
-    font-size: 1.05rem;
-  }
-
-  .landing__cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-  }
-
-  @media (min-width: 640px) {
-    .landing__cards {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .landing__card {
-    display: block;
-    padding: var(--space-xl);
-    border-radius: 12px;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-    text-align: left;
-    transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
-  }
-
-  .landing__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(11, 19, 43, 0.12);
-  }
-
-  .landing__card h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: var(--space-sm);
-  }
-
-  .landing__card p {
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: var(--space-md);
-  }
-
-  .landing__arrow {
-    font-size: 1.25rem;
-    color: var(--color-accent);
-    font-weight: 700;
-  }
-
-  .landing__card--creative:hover {
-    border-color: var(--color-lime);
-  }
-
-  .landing__card--professional:hover {
-    border-color: var(--color-navy);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .landing__card--professional:hover {
-      border-color: var(--color-lime);
-    }
-  }
-</style>

@@ -1,0 +1,49 @@
+
+> martinpristal@0.0.1 build
+> astro build
+
+09:41:31 [content] Syncing content
+09:41:31 [content] Synced content
+09:41:31 [types] Generated 617ms
+09:41:31 [build] output: "static"
+09:41:31 [build] mode: "static"
+09:41:31 [build] directory: /mnt/f/projects/weby/martinpristal/dist/
+09:41:31 [build] Collecting build info...
+09:41:31 [build] ✓ Completed in 673ms.
+09:41:32 [build] Building static entrypoints...
+09:41:50 [vite] ✓ built in 17.21s
+09:41:50 [build] ✓ Completed in 17.77s.
+
+ generating static routes 
+09:41:51 ▶ src/pages/creative.astro
+09:41:51   └─ /creative/index.html (+62ms) 
+09:41:51 ▶ src/pages/professional.astro
+09:41:51   └─ /professional/index.html (+14ms) 
+09:41:51 ▶ src/pages/index.astro
+09:41:51   └─ /index.html (+12ms) 
+09:41:51 ✓ Completed in 1.26s.
+
+ generating optimized images 
+09:41:51   ▶ /_astro/logo.D6Th8_1W_2sqlG3.webp (reused cache entry) (+32ms) (1/19)
+09:41:51   ▶ /_astro/PXL_20260226_141631970.BUL8d11I_UPBdK.webp (reused cache entry) (+35ms) (2/19)
+09:41:51   ▶ /_astro/profil_extra.CutXbeha_Z2rEFzN.webp (reused cache entry) (+42ms) (3/19)
+09:41:51   ▶ /_astro/vsehodruhu.B8ZcLrZe_1bRfND.webp (reused cache entry) (+44ms) (4/19)
+09:41:51   ▶ /_astro/PXL_20251114_175140526.DTVDcD92_Z15TGoB.webp (reused cache entry) (+46ms) (5/19)
+09:41:51   ▶ /_astro/PXL_20260225_181503857.41Oi8II-_Zt7jer.webp (reused cache entry) (+50ms) (6/19)
+09:41:51   ▶ /_astro/PXL_20251118_162533352.C7Bux8i0_Z3PkKb.webp (reused cache entry) (+57ms) (7/19)
+09:41:51   ▶ /_astro/PXL_20251118_163706687.DmK4XKD1_Z1M6KOK.webp (reused cache entry) (+61ms) (8/19)
+09:41:51   ▶ /_astro/PXL_20251024_132850051.C4ckFyT-_Z1OwFEj.webp (reused cache entry) (+63ms) (9/19)
+09:41:51   ▶ /_astro/PXL_20241212_173348000.B001dhez_ZrfQeR.webp (reused cache entry) (+66ms) (10/19)
+09:41:51   ▶ /_astro/IMG_20250731_114924_186.BZUEVl0E_Z1SL04L.webp (reused cache entry) (+70ms) (11/19)
+09:41:51   ▶ /_astro/profil_profi.C-rH5lZY_Z1GDrfD.webp (reused cache entry) (+77ms) (12/19)
+09:41:51   ▶ /_astro/logo.D6Th8_1W_Z1z2lUE.webp (reused cache entry) (+60ms) (13/19)
+09:41:51   ▶ /_astro/PXL_20260226_141631970.BUL8d11I_Z1EMdf3.webp (reused cache entry) (+64ms) (14/19)
+09:41:51   ▶ /_astro/PXL_20251114_175140526.DTVDcD92_1nDBVw.webp (reused cache entry) (+60ms) (15/19)
+09:41:51   ▶ /_astro/PXL_20251118_163706687.DmK4XKD1_Grxvn.webp (reused cache entry) (+48ms) (16/19)
+09:41:51   ▶ /_astro/PXL_20241113_133650402.eXvVA2Bb_1sF410.webp (reused cache entry) (+44ms) (17/19)
+09:41:51   ▶ /_astro/PXL_20241212_173348000.B001dhez_22is6g.webp (reused cache entry) (+49ms) (18/19)
+09:41:51   ▶ /_astro/martin_fb.clJ8XEf-_131yI.webp (reused cache entry) (+50ms) (19/19)
+09:41:51 ✓ Completed in 130ms.
+
+09:41:52 [build] 3 page(s) built in 20.79s
+09:41:52 [build] Complete!
