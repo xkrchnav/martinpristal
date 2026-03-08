@@ -1,0 +1,9 @@
+Logo navigation check:
+
+In dist/creative/index.html:
+  Header logo href: ['/']
+  
+  Logo links to "/" which is the professional page (index.astro) — correct.
+  Navigating from creative page via logo leads to / (professional page).
+  
+Verified via HTML inspection: href="/" on header logo in creative page.

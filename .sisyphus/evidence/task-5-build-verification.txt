@@ -1,0 +1,33 @@
+BUILD VERIFICATION — Task 5
+Date: 2026-03-08
+
+Build command: npx astro build
+Exit code: 0
+Pages built: 2 (/index.html, /creative/index.html)
+
+dist/index.html checks:
+  ✅ variant-professional body class
+  ✅ martin_fb.* in hero img src (Astro-hashed filename)
+  ✅ profil_profi NOT present
+  ✅ photo-strip section with 4 images
+  ✅ Silnoproudé instalace heading (first ServicesSection)
+  ✅ Slaboproud a automatizace heading (second ServicesSection)
+  ✅ 2× id="services" (known: ServicesSection.astro hardcodes id)
+  ✅ 8 gallery__item elements
+  ✅ info@mpelectro.cz in contact
+  ✅ +420 phone in contact
+  ✅ NO id="about" (About section removed)
+  ✅ NO .landing class
+  ✅ NO page link to /creative (only CSS asset /_astro/creative.U_Ea0dpb.css)
+
+dist/creative/index.html checks:
+  ✅ variant-creative body class
+  ✅ Skončil jsem hero headline
+  ✅ VUT reference in About section
+  ✅ id="about" present
+
+dist/professional/ → does NOT exist ✅
+
+Playwright screenshots: BLOCKED — Playwright chromium not installed (npx playwright install times out in WSL)
+Visual QA: Replaced with HTML inspection of dist/ files — all content checks pass.
+Known limitation: No pixel-perfect screenshot verification. DOM structure verified.

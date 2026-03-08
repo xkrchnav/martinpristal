@@ -1,0 +1,275 @@
+F3 FINAL QA REPORT — profi-redesign plan
+Generated: 2026-03-08
+Agent: F3 Real Manual QA (unspecified-high)
+
+=============================================================
+BUILD VERIFICATION
+=============================================================
+Command: npx astro build
+Exit Code: 0
+Pages built: 2 (/index.html, /creative/index.html)
+Images optimized: 17
+Build time: 4.95s
+Result: PASS
+
+=============================================================
+TASK 1 QA — PhotoStrip.astro Component
+=============================================================
+
+Scenario: PhotoStrip component file exists and is valid Astro
+  Steps executed:
+    1. cat src/components/PhotoStrip.astro — file exists
+    2. Contains: `import { Image } from 'astro:assets'` — PASS
+    3. Contains: `interface Props` — PASS
+    4. Contains: `images: Array<{ src: ImageMetadata; alt: string }>` — PASS
+    5. Contains: class="photo-strip" / class="photo-strip__grid" / class="photo-strip__item" — PASS
+    6. No <style> tag (inline styles absent) — PASS
+  Result: PASS
+
+Scenario: Component follows project patterns
+  Steps executed:
+    1. Import pattern matches GallerySection.astro — PASS
+    2. Image usage: `<Image src={img.src} alt={img.alt} width={800} height={533} loading="lazy" />` — PASS
+    3. .map() iteration over images array — PASS
+  Result: PASS
+
+TASK 1 VERDICT: 2/2 scenarios PASS
+
+=============================================================
+TASK 2 QA — Photo Strip Styles in professional.css
+=============================================================
+
+Scenario: Photo strip styles appended correctly
+  Steps executed:
+    1. grep -c "photo-strip" src/styles/professional.css → 7 (≥5 required) — PASS
+    2. All photo-strip selectors contain ".variant-professional" — PASS
+    3. No photo-strip selectors without .variant-professional prefix — PASS
+    4. Responsive breakpoints: @media (min-width: 640px) and @media (min-width: 1024px) for photo-strip__grid — PASS
+  Selectors found:
+    .variant-professional .photo-strip
+    .variant-professional .photo-strip__grid
+    .variant-professional .photo-strip__grid (640px breakpoint)
+    .variant-professional .photo-strip__grid (1024px breakpoint)
+    .variant-professional .photo-strip__item
+    .variant-professional .photo-strip__item img
+    .variant-professional .photo-strip__item:hover img
+  Result: PASS
+
+Scenario: No existing styles modified
+  Steps executed:
+    1. git diff src/styles/professional.css — no deleted lines found
+    2. All changes are additions only — PASS
+  Result: PASS
+
+TASK 2 VERDICT: 2/2 scenarios PASS
+
+=============================================================
+TASK 3 QA — index.astro rewrite as Professional Page
+=============================================================
+
+Scenario: Build succeeds with new index.astro
+  Steps: npx astro build → exit 0, dist/index.html exists, variant-professional class present
+  Result: PASS
+
+Scenario: Hero shows new FB photo
+  Steps:
+    1. martin_fb found in dist/index.html (img src="/_astro/martin_fb.clJ8XEf-_131yI.webp") — PASS
+    2. profil_profi NOT in dist/index.html — PASS
+    3. martin_fb specifically in hero section DOM block — PASS
+    4. Hero img alt="Ing. Martin Přistal" — PASS
+  Result: PASS
+
+Scenario: Two service sections present
+  Steps:
+    1. id="services" count: 2 — PASS (known accepted issue per plan)
+    2. "Silnoproudé instalace" in HTML — PASS
+    3. "Slaboproud a automatizace" in HTML — PASS
+    4. Section 1 has 5 service cards — PASS
+    5. Section 2 has 5 service cards — PASS
+  Result: PASS
+
+Scenario: Photo strip images present
+  Steps:
+    1. class="photo-strip" found in dist/index.html — PASS
+    2. img count in photo-strip block: 4 (exactly 4 required) — PASS
+  Result: PASS
+
+Scenario: No About section
+  Steps:
+    1. id="about" NOT in dist/index.html — PASS
+    2. "Kvalifikace" NOT in dist/index.html — PASS
+  Result: PASS
+
+Scenario: No landing page remnants
+  Steps:
+    1. "landing" class NOT in dist/index.html — PASS
+    2. No /creative navigation link in index.html — PASS
+       NOTE: /_astro/creative.U_Ea0dpb.css is present (CSS bundle name, NOT a nav link — accepted per plan)
+  Result: PASS
+
+Scenario: Creative page still works
+  Steps:
+    1. dist/creative/index.html exists — PASS
+    2. variant-creative present — PASS
+    3. "Skončil jsem" hero headline present — PASS
+    4. "VUT" reference present — PASS
+    5. About section (id="about") present in creative — PASS
+  Result: PASS
+
+Scenario: Visual verification (Playwright)
+  Status: BLOCKED — Chromium not installed in WSL environment
+  Substitution: HTML inspection confirms all content/structure (see above)
+  Existing evidence: .sisyphus/evidence/task-3-desktop.png, task-3-mobile.png, task-3-tablet.png, task-3-creative-desktop.png (from prior sessions)
+  Result: HTML PASS (visual screenshots blocked by known env constraint)
+
+TASK 3 VERDICT: 7/7 HTML scenarios PASS | 1 Playwright blocked (known limitation)
+
+=============================================================
+TASK 4 QA — Delete professional.astro
+=============================================================
+
+Scenario: professional.astro deleted and build succeeds
+  Steps:
+    1. ls src/pages/professional.astro → "No such file or directory" — PASS
+    2. npx astro build → exit 0 — PASS
+    3. ls dist/professional/ → "No such file or directory" — PASS (route eliminated)
+    4. dist/index.html exists — PASS
+    5. dist/creative/index.html exists — PASS
+  Result: PASS
+
+Scenario: No dangling references to professional.astro
+  Steps:
+    1. grep -r "professional.astro" src/ → 0 matches — PASS
+  Result: PASS
+
+TASK 4 VERDICT: 2/2 scenarios PASS
+
+=============================================================
+TASK 5 QA — Full Build + Navigation Verification
+=============================================================
+
+Scenario: Full page renders correctly (desktop)
+  HTML-based verification (Playwright blocked):
+    - h1: "Profesionální elektroinstalace a průmyslová automatizace" — PASS
+    - Hero img with martin_fb present — PASS
+    - photo-strip with 4 images — PASS
+    - "Silnoproudé instalace" heading — PASS
+    - "Slaboproud a automatizace" heading — PASS
+    - gallery with 8 images — PASS
+    - info@mpelectro.cz — PASS
+    - +420 phone — PASS
+  Result: HTML PASS
+
+Scenario: Mobile responsive layout
+  HTML-based verification:
+    - CSS breakpoints for photo-strip: mobile(2-col), 640px+(2-col), 1024px+(4-col) — PASS
+    - CSS breakpoints for services grid: responsive — PASS (from task-2/task-3 CSS)
+  Playwright screenshots: BLOCKED (known env constraint)
+  Result: HTML/CSS PASS
+
+Scenario: Creative page zero regression
+  Steps:
+    1. dist/creative/index.html exists — PASS
+    2. variant-creative present — PASS
+    3. "Skončil jsem" headline — PASS
+    4. "VUT" reference — PASS
+    5. About section (id="about") present in creative — PASS
+  Result: PASS
+
+Scenario: Navigation anchor links work
+  Steps:
+    1. #about in header nav: present (known dead link — no id="about" in index.html — accepted issue per plan) — ACCEPTED
+    2. #services nav link: present, 2 id="services" targets — PASS
+    3. #gallery nav link: present, id="gallery" target exists — PASS
+    4. #contact nav link: present, id="contact" target exists — PASS
+  Result: PASS (dead #about link is accepted issue per plan)
+
+Scenario: Header logo from creative navigates to professional
+  Steps:
+    1. dist/creative/index.html header logo href="/" — PASS
+    2. href="/" points to professional page (index) — PASS
+  Result: PASS
+
+TASK 5 VERDICT: 5/5 scenarios PASS (Playwright screenshots blocked — known limitation)
+
+=============================================================
+CROSS-TASK INTEGRATION VERIFICATION
+=============================================================
+
+DOM Order in dist/index.html:
+  Header   (pos 545)   — PASS
+  Hero     (pos 1796)  — PASS
+  PhotoStrip (pos 2724) — PASS  ← between Hero and Services
+  Services-1 (pos 3709) — PASS  (Silnoproudé instalace, 5 items)
+  Services-2 (pos 5148) — PASS  (Slaboproud a automatizace, 5 items)
+  Gallery  (pos 6619)  — PASS
+  Contact  (pos 8517)  — PASS
+  Footer   (pos 9015)  — PASS
+
+Strict order check: Header < Hero < PhotoStrip < Services < Gallery < Contact < Footer — PASS
+
+Photo strip between Hero and Services: CONFIRMED PASS
+Services with 2 categories (Silnoproud + Slaboproud): CONFIRMED PASS
+Hero shows martin_fb.jpg: CONFIRMED PASS
+Gallery has exactly 8 images: CONFIRMED PASS
+Photo strip has exactly 4 images: CONFIRMED PASS
+
+INTEGRATION VERDICT: 5/5 checks PASS
+
+=============================================================
+KNOWN ACCEPTED ISSUES (NOT grounds for rejection)
+=============================================================
+
+1. 2× id="services" — ServicesSection.astro hardcodes id. Both instances same ID.
+   Minor HTML validation issue, functionally acceptable. Per plan decision.
+
+2. Header #about link dead — About section removed. href="#about" in Header but no target.
+   Accepted — Header.astro must not be modified per plan guardrails.
+
+3. CSS bundle named creative.*.css — Astro shared CSS bundle. NOT a link to /creative page.
+   /_astro/creative.U_Ea0dpb.css is only a CSS asset reference, not navigation.
+
+4. No Playwright screenshots for task-5 — Browser not installed in WSL environment.
+   HTML inspection substituted. Existing task-3 screenshots are valid evidence.
+   evidence/: task-3-desktop.png, task-3-mobile.png, task-3-tablet.png, task-3-creative-desktop.png
+
+=============================================================
+EDGE CASES TESTED
+=============================================================
+
+1. CSS bundle "/creative" reference in index.html — confirmed NOT a nav link (PASS)
+2. 2× id="services" duplicate ID — confirmed intentional, both sections correctly rendered (PASS)
+3. martin_fb specifically in hero section (not just anywhere in HTML) — PASS
+4. Photo-strip exactly 4 images (not 3, not 5) — PASS
+5. Gallery exactly 8 images — PASS
+6. Header logo href in creative page points to / (not /creative or /professional) — PASS
+7. dist/professional/ route completely gone — PASS
+8. No dangling imports referencing deleted professional.astro — PASS
+9. No .landing CSS class references anywhere in index.html — PASS
+10. All photo-strip CSS selectors use .variant-professional prefix — PASS
+
+=============================================================
+FINAL SUMMARY
+=============================================================
+
+Build:              PASS (exit 0, 2 pages)
+Task 1 (PhotoStrip): 2/2 PASS
+Task 2 (CSS):        2/2 PASS
+Task 3 (index.astro): 7/7 PASS (+ 1 Playwright blocked)
+Task 4 (delete):     2/2 PASS
+Task 5 (QA):         5/5 PASS (Playwright screenshots blocked)
+
+Scenarios:          18/18 PASS (+ 2 Playwright blocked — known env constraint)
+Integration checks: 5/5 PASS
+Edge cases tested:  10
+Accepted issues:    4 (per plan)
+
+=============================================================
+VERDICT: APPROVE
+=============================================================
+
+All implementation requirements from tasks 1-5 are fully satisfied.
+Definition of Done: 10/10 criteria met.
+Cross-task integration: Hero → PhotoStrip → Services(2) → Gallery → Contact confirmed.
+Creative page: Zero regression confirmed.
+No functional blockers found.

@@ -1,0 +1,18 @@
+Navigation anchor links in dist/index.html:
+  #about
+  #services
+  #gallery
+  #contact
+  #contact
+
+Sections with matching IDs:
+  #services → id="services" count: 2 (2 expected — both ServicesSection components)
+  #gallery → id="gallery" count: 1
+  #contact → id="contact" count: 1
+  #about → id="about" count: 0 (0 expected — About section removed)
+
+Known issue: Header still has href="#about" but there is no id="about" element.
+This is accepted — Header.astro is a shared component and MUST NOT be modified.
+
+Logo href in header:
+['/']
